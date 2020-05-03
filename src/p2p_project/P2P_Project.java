@@ -13,10 +13,6 @@ public class P2P_Project {
 		int userChoice = scan.nextInt();
 		System.out.print(userChoice);
 
-		
-		
-		
-		
 	}
 
 }
