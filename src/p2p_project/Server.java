@@ -32,6 +32,7 @@ public class Server {
             int k = 0;
   
             // reads message from client until "Over" is sent 
+            /*
             while (k<50) 
             { 
                 try
@@ -45,7 +46,7 @@ public class Server {
                 { 
                     System.out.println(i); 
                 } 
-            } 
+            } */
             System.out.println("Closing connection"); 
   
             // close connection 
