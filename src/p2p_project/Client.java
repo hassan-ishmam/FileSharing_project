@@ -17,6 +17,7 @@ public class Client {
         try
         { 
             socket = new Socket(address, port); 
+        	//socket = new Socket("localhost", 4333);
             System.out.println("Connected"); 
   
             // takes input from terminal 
@@ -27,7 +28,7 @@ public class Client {
             
             byte[] byteArr = new byte[20002];
             InputStream is = socket.getInputStream();
-            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test2.txt");
+            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test3.txt");
             is.read(byteArr, 0, byteArr.length);
             fr.write(byteArr, 0, byteArr.length);
         } 
@@ -51,7 +52,7 @@ public class Client {
     
     public static void main(String[] args) throws IOException {
     	// TODO Auto-generated method stub
-    	Client client = new Client("192.168.1.35", 5000); 
+    	Client client = new Client("192.168.1.10", 5000); 
     }
 
 

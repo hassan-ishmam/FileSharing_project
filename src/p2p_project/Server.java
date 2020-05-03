@@ -35,7 +35,8 @@ public class Server {
         catch(IOException i) 
         { 
             System.out.println(i); 
-        } 
+        }
+        
     }
     
     public static void main(String[] args) {
