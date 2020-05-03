@@ -36,9 +36,11 @@ public class Client {
   
         // string to read message from input 
         String fileName = "CECS 475 Lab 7.pdf";
-        String directoryPath = "C:\\Users\\Hassan Ishmam\\Downloads\\Test"; 
+        String filePath = "C:\\Users\\Hassan Ishmam\\Downloads\\Test\\lab.pdf"; 
         
-        File myFile = new File(directoryPath+"//"+fileName);
+        
+        
+        File myFile = new File(filePath);
         int length;
         
         byte [] byte_arr = new byte[10];

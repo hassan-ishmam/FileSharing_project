@@ -29,14 +29,16 @@ public class Server {
                 new BufferedInputStream(socket.getInputStream())); 
   
             String line = ""; 
+            int k = 0;
   
             // reads message from client until "Over" is sent 
-            while (!line.equals("Over")) 
+            while (k<50) 
             { 
                 try
                 { 
                     line = in.readUTF(); 
                     System.out.println(line); 
+                    k++;
   
                 } 
                 catch(IOException i) 
