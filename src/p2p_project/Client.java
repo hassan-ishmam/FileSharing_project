@@ -41,34 +41,10 @@ public class Client {
         } 
   
         // string to read message from input 
-        String fileName = "CECS 475 Lab 7.pdf";
-        String filePath = "C:\\Users\\Hassan Ishmam\\Downloads\\Test\\lab.pdf"; 
         
-        
-        
-        File myFile = new File(filePath);
-        int length;
-        
-        byte [] byte_arr = new byte[10];
-        
-        InputStream in = new BufferedInputStream(new FileInputStream(myFile));
        // OutputStream out = new BufferedOutputStream(socket.getOutputStream());
         
-        try {
-        	
-        	 while((length = in.read(byte_arr))>0)
-        		
-        		out.write(byte_arr,0, length);
-        }
-        finally
-        {
-            out.flush();
-            out.close();
-            in.close();
-            System.out.println("closing socket...");
-            socket.close();
-        }
-  
+   
         // keep reading until "Over" is input 
         
     } 
