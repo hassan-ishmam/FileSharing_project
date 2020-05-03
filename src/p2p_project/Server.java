@@ -31,7 +31,14 @@ public class Server {
             
             OutputStream os = socket.getOutputStream();
             os.write(byteArr, 0, byteArr.length);
-        } 
+            
+            System.out.println("Closing Connection..");
+            fin.close();
+            os.close();
+            socket.close();
+            
+        }
+        
         catch(IOException i) 
         { 
             System.out.println(i); 

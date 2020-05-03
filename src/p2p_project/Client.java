@@ -31,6 +31,11 @@ public class Client {
             FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test3.txt");
             is.read(byteArr, 0, byteArr.length);
             fr.write(byteArr, 0, byteArr.length);
+            
+            System.out.println("File transfer complete!\nClosing connection..");
+            is.close();
+            fr.close();
+            socket.close();
         } 
         catch(UnknownHostException u) 
         { 
