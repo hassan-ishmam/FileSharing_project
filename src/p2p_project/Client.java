@@ -38,7 +38,7 @@ public class Client {
         String line = ""; 
   
         // keep reading until "Over" is input 
-        while (!line.equals("Over")) 
+        while (!line.equals("Over"))  
         { 
             try
             { 
@@ -66,7 +66,7 @@ public class Client {
     
     public static void main(String[] args) {
     	// TODO Auto-generated method stub
-    	Client client = new Client("127.0.0.1", 5000); 
+    	Client client = new Client("192.168.1.35", 5000); 
     }
 
 
