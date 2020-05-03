@@ -24,34 +24,13 @@ public class Server {
             socket = server.accept(); 
             System.out.println("Client accepted"); 
   
-            // takes input from the client socket 
-            in = new DataInputStream( 
-                new BufferedInputStream(socket.getInputStream())); 
-  
-            String line = ""; 
-            int k = 0;
-  
-            // reads message from client until "Over" is sent 
-            /*
-            while (k<50) 
-            { 
-                try
-                { 
-                    line = in.readUTF(); 
-                    System.out.println(line); 
-                    k++;
-  
-                } 
-                catch(IOException i) 
-                { 
-                    System.out.println(i); 
-                } 
-            } */
-            System.out.println("Closing connection"); 
-  
-            // close connection 
-            socket.close(); 
-            in.close(); 
+            FileInputStream fin = new FileInputStream("C:\\Users\\Hassan Ishmam\\Downloads\\Test\\test1.txt");
+            
+            byte byteArr[] = new byte[2000];
+            fin.read(byteArr, 0, byteArr.length);
+            
+            OutputStream os = socket.getOutputStream();
+            os.write(byteArr, 0, byteArr.length);
         } 
         catch(IOException i) 
         { 

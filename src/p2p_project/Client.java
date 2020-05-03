@@ -24,6 +24,12 @@ public class Client {
   
             // sends output to the socket 
             out    = new DataOutputStream(socket.getOutputStream()); 
+            
+            byte[] byteArr = new byte[20002];
+            InputStream is = socket.getInputStream();
+            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test2.txt");
+            is.read(byteArr, 0, byteArr.length);
+            fr.write(byteArr, 0, byteArr.length);
         } 
         catch(UnknownHostException u) 
         { 
@@ -49,7 +55,8 @@ public class Client {
        // OutputStream out = new BufferedOutputStream(socket.getOutputStream());
         
         try {
-        	while((length = in.read(byte_arr))>0)
+        	
+        	 while((length = in.read(byte_arr))>0)
         		
         		out.write(byte_arr,0, length);
         }
