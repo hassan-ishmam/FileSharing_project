@@ -22,6 +22,7 @@ public class Server {
     	ObjectInputStream ois;
     	String str;
     	int index;
+    	/*
     	
     	try
     	{  
@@ -66,9 +67,9 @@ public class Server {
     	catch(IOException e){
     		System.out.println("I/O exception");
     	}
-    	
+    	*/
     	//Transfers only specified file types	v1.0
-    	/*
+    	
         try
         { 
         	
@@ -102,7 +103,7 @@ public class Server {
         { 
             System.out.println(i); 
         }
-         */
+         
         
     }
     

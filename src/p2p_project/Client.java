@@ -67,8 +67,25 @@ public class Client {
             socket.close();
             System.out.println("Closed Connection from Client..");
             
-            //Transfers only specified file types	v1.0
-            /*
+            
+        } 
+        catch(UnknownHostException u) 
+        { 
+            System.out.println(u); 
+        } 
+        catch(IOException i) 
+        { 
+            System.out.println(i); 
+        }
+        
+        try {
+        	
+        	//Transfers only specified file types	v1.0
+        	
+        	socket = new Socket(address, port); 
+        	//socket = new Socket("localhost", 4333);
+            System.out.println("Connected"); 
+            
   
             // takes input from terminal 
             input  = new DataInputStream(System.in); 
@@ -78,7 +95,7 @@ public class Client {
             
             byte[] byteArr = new byte[20002];
             InputStream is = socket.getInputStream();
-            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test3.txt");
+            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test5.txt");
             is.read(byteArr, 0, byteArr.length);
             fr.write(byteArr, 0, byteArr.length);
             
@@ -86,16 +103,14 @@ public class Client {
             is.close();
             fr.close();
             socket.close();
-            */
-        } 
-        catch(UnknownHostException u) 
-        { 
-            System.out.println(u); 
-        } 
+            
+        	
+        }
         catch(IOException i) 
         { 
             System.out.println(i); 
-        } 
+        }
+        
   
         // string to read message from input 
         
