@@ -14,6 +14,7 @@ public class Client {
     public Client(String address, int port) throws IOException, ClassNotFoundException
     { 
         // establish a connection 
+    	/*
         try
         { 
             socket = new Socket(address, port); 
@@ -63,7 +64,7 @@ public class Client {
             objBIS.close();
             objOS.close();
             objIS.close();
-            */
+            
             socket.close();
             System.out.println("Closed Connection from Client..");
             
@@ -77,6 +78,7 @@ public class Client {
         { 
             System.out.println(i); 
         }
+        */
         
         try {
         	

@@ -83,7 +83,7 @@ public class Server {
             socket = server.accept(); 
             System.out.println("Client accepted"); 
   
-            FileInputStream fin = new FileInputStream("C:\\Users\\Hassan Ishmam\\Downloads\\Test\\test1.txt");
+            FileInputStream fin = new FileInputStream("C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\test2.txt");
             
             byte byteArr[] = new byte[2000];
             fin.read(byteArr, 0, byteArr.length);
