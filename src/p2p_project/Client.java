@@ -20,20 +20,30 @@ public class Client {
         	//socket = new Socket("localhost", 4333);
             System.out.println("Connected"); 
             
-            ObjectOutputStream objOS = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream objIS = new ObjectInputStream(socket.getInputStream());
+            //ObjectOutputStream objOS = new ObjectOutputStream(socket.getOutputStream());
+            //ObjectInputStream objIS = new ObjectInputStream(socket.getInputStream());
             
             //String fileName = (String)objIS.readObject();
             String fileLocation;// Stores the directory name
             String directoryPath = "C:\\Users\\Hassan\\Downloads\\Test2\\";
             
             //File myFile = new File(directoryPath+"//"+fileName);
-            File myFile = new File("C:\\Users\\Hassan\\Downloads\\Test2\\something.pdf");
-            myFile.createNewFile();
-            long length = myFile.length();
+            //File myFile = new File("C:\\Users\\Hassan\\Downloads\\Test2\\something.pdf");
+            //myFile.createNewFile();
+            //long length = myFile.length();
             
-            byte [] byte_arr = new byte[(int)length];
+            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\something2.pdf");
+            InputStream is = socket.getInputStream();
             
+            byte [] byte_arr = new byte[2002];
+            
+            is.read(byte_arr, 0, byte_arr.length);
+            fr.write(byte_arr, 0, byte_arr.length);
+            
+            System.out.println("File transfer complete!\nClosing connection..");
+            
+            //byte [] byte_arr = new byte[(int)length];
+            /*
             objOS.writeObject((int)myFile.length());
             objOS.flush();
             
@@ -46,11 +56,14 @@ public class Client {
             objOS.write(byte_arr,0,byte_arr.length);
             
             objOS.flush();
+            
+            
             System.out.println("Closing Connection from Client..");
             FIS.close();
             objBIS.close();
             objOS.close();
             objIS.close();
+            */
             socket.close();
             System.out.println("Closed Connection from Client..");
             
