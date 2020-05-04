@@ -44,12 +44,13 @@ public class Client {
             objOS.write(byte_arr,0,byte_arr.length);
             
             objOS.flush();
-            
+            System.out.println("Closing Connection from Client..");
             FIS.close();
             objBIS.close();
             objOS.close();
             objIS.close();
             socket.close();
+            System.out.println("Closed Connection from Client..");
             
             //Transfers only specified file types	v1.0
             /*

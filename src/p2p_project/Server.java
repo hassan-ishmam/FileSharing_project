@@ -47,11 +47,17 @@ public class Server {
             
             oos.write(byteArr, 0, byteArr.length);
             
+            System.out.println("Closing Connection from Server..");
+            
             oos.close();
             ois.close();
             FIS.close();
             objBIS.close();
             socket.close();
+            
+            System.out.println("Closed from Server");
+            
+            
   
     	}
     	catch(IndexOutOfBoundsException e){
