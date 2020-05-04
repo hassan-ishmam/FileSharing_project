@@ -1,6 +1,7 @@
 package p2p_project;
 
-import java.net.*; 
+import java.net.*;
+import java.util.ArrayList;
 import java.io.*;
 
 public class Server {
@@ -11,11 +12,62 @@ public class Server {
     private DataInputStream in       =  null; 
   
     // constructor with port 
-    public Server(int port) 
+    public Server(int port) throws ClassNotFoundException 
     { 
         // starts server and waits for a connection 
+    	
+    	
+    	
+    	ObjectOutputStream oos;
+    	ObjectInputStream ois;
+    	String str;
+    	int index;
+    	
+    	try
+    	{  
+    		server = new ServerSocket(port); 
+            System.out.println("Server started"); 
+  
+            System.out.println("Waiting for a client ..."); 
+  
+            socket = server.accept(); 
+            System.out.println("Client accepted"); 
+    		
+    		InputStream is=socket.getInputStream();
+    		oos = new ObjectOutputStream(socket.getOutputStream());
+    		ois = new ObjectInputStream(is);
+    		
+    		File myFile = new File("C:\\Users\\Hassan Ishmam\\Downloads\\Test\\census2020.pdf");
+    		
+    		byte byteArr[] = new byte[20002];
+    		
+    		FileInputStream FIS=new FileInputStream(myFile);
+            BufferedInputStream objBIS = new BufferedInputStream(FIS);
+            objBIS.read(byteArr,0,(int)myFile.length());
+            
+            oos.write(byteArr, 0, byteArr.length);
+            
+            oos.close();
+            ois.close();
+            FIS.close();
+            objBIS.close();
+            socket.close();
+  
+    	}
+    	catch(IndexOutOfBoundsException e){
+    		System.out.println("Index out of bounds exception");
+    	}
+    	catch(IOException e){
+    		System.out.println("I/O exception");
+    	}
+    	
+    	//Transfers only specified file types	v1.0
+    	/*
         try
         { 
+        	
+        	
+        	
             server = new ServerSocket(port); 
             System.out.println("Server started"); 
   
@@ -36,6 +88,7 @@ public class Server {
             fin.close();
             os.close();
             socket.close();
+           
             
         }
         
@@ -43,10 +96,11 @@ public class Server {
         { 
             System.out.println(i); 
         }
+         */
         
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
     	// TODO Auto-generated method stub
     	Server server = new Server(5000); 
     }

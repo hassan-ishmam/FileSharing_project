@@ -11,7 +11,7 @@ public class Client {
     private DataOutputStream out     = null; 
   
     // constructor to put ip address and port 
-    public Client(String address, int port) throws IOException
+    public Client(String address, int port) throws IOException, ClassNotFoundException
     { 
         // establish a connection 
         try
@@ -19,6 +19,40 @@ public class Client {
             socket = new Socket(address, port); 
         	//socket = new Socket("localhost", 4333);
             System.out.println("Connected"); 
+            
+            ObjectOutputStream objOS = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objIS = new ObjectInputStream(socket.getInputStream());
+            
+            String fileName = (String)objIS.readObject();
+            String fileLocation;// Stores the directory name
+            String directoryPath = "C:\\Users\\Hassan\\Downloads\\Test2\\";
+            
+            File myFile = new File(directoryPath+"//"+fileName);
+            long length = myFile.length();
+            
+            byte [] byte_arr = new byte[(int)length];
+            
+            objOS.writeObject((int)myFile.length());
+            objOS.flush();
+            
+            FileInputStream FIS=new FileInputStream(myFile);
+            BufferedInputStream objBIS = new BufferedInputStream(FIS);
+            objBIS.read(byte_arr,0,(int)myFile.length());
+            
+            //System.out.println("Sending the file of " +byte_arr.length+ " bytes");
+            
+            objOS.write(byte_arr,0,byte_arr.length);
+            
+            objOS.flush();
+            
+            FIS.close();
+            objBIS.close();
+            objOS.close();
+            objIS.close();
+            socket.close();
+            
+            //Transfers only specified file types	v1.0
+            /*
   
             // takes input from terminal 
             input  = new DataInputStream(System.in); 
@@ -36,6 +70,7 @@ public class Client {
             is.close();
             fr.close();
             socket.close();
+            */
         } 
         catch(UnknownHostException u) 
         { 
@@ -55,7 +90,7 @@ public class Client {
         
     } 
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
     	// TODO Auto-generated method stub
     	Client client = new Client("192.168.1.10", 5000); 
     }
