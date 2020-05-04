@@ -23,11 +23,12 @@ public class Client {
             ObjectOutputStream objOS = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream objIS = new ObjectInputStream(socket.getInputStream());
             
-            String fileName = (String)objIS.readObject();
+            //String fileName = (String)objIS.readObject();
             String fileLocation;// Stores the directory name
             String directoryPath = "C:\\Users\\Hassan\\Downloads\\Test2\\";
             
-            File myFile = new File(directoryPath+"//"+fileName);
+            //File myFile = new File(directoryPath+"//"+fileName);
+            File myFile = new File("C:\\Users\\Hassan\\Downloads\\Test2\\something.pdf");
             long length = myFile.length();
             
             byte [] byte_arr = new byte[(int)length];
