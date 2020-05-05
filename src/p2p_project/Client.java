@@ -121,11 +121,13 @@ public class Client {
    
         // keep reading until "Over" is input 
         
-    } 
+    }
+    
+    
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
     	// TODO Auto-generated method stub
-    	Client client = new Client("192.168.1.10", 5000); 
+    	Client client = new Client("localhost", 5000); 
     }
 
 

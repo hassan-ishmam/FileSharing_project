@@ -69,7 +69,7 @@ public class Server {
     	}
     	*/
     	//Transfers only specified file types	v1.0
-    	
+    	String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Test";
         try
         { 
         	
@@ -81,19 +81,30 @@ public class Server {
             System.out.println("Waiting for a client ..."); 
   
             socket = server.accept(); 
-            System.out.println("Client accepted"); 
-  
-            FileInputStream fin = new FileInputStream("C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\test2.txt");
+            System.out.println("Client accepted");
             
-            byte byteArr[] = new byte[2000];
-            fin.read(byteArr, 0, byteArr.length);
             
-            OutputStream os = socket.getOutputStream();
-            os.write(byteArr, 0, byteArr.length);
+            File [] listOfFiles = getListOfFiles(directory);
+            FileInputStream fin;
+            OutputStream os;
+            
+            for(int i = 0; i<listOfFiles.length; i++) {
+            	
+            	fin = new FileInputStream(directory+ "\\" + listOfFiles[i].getName());
+                
+                byte byteArr[] = new byte[2000];
+                fin.read(byteArr, 0, byteArr.length);
+                
+                os = socket.getOutputStream();
+                os.write(byteArr, 0, byteArr.length);
+                
+                fin.close();
+                os.close();
+            	
+            }
             
             System.out.println("Closing Connection..");
-            fin.close();
-            os.close();
+            
             socket.close();
            
             
@@ -107,9 +118,29 @@ public class Server {
         
     }
     
+    public File[] getListOfFiles(String path) {
+    	
+    	File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+    	
+    	
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+		  if (listOfFiles[i].isFile()) {
+		    System.out.println("File " + listOfFiles[i].getName());
+		  } else if (listOfFiles[i].isDirectory()) {
+		    System.out.println("Directory " + listOfFiles[i].getName());
+		  }
+		}
+		
+    	
+    	return listOfFiles;
+    }
+    
     public static void main(String[] args) throws ClassNotFoundException {
     	// TODO Auto-generated method stub
-    	Server server = new Server(5000); 
+    	Server server = new Server(5000);
+    	
     }
 
 
