@@ -90,18 +90,18 @@ public class Client {
             
   
             // takes input from terminal 
-            input  = new DataInputStream(System.in); 
+            //input  = new DataInputStream(System.in); 
   
             // sends output to the socket 
             out    = new DataOutputStream(socket.getOutputStream()); 
             InputStream is = socket.getInputStream();
-            String filename = input.readUTF();
-            System.out.println("Got file: " + filename);
+            //String filename = input.readUTF();
+            //System.out.println("Got file: " + filename);
             
             
 	            byte[] byteArr = new byte[20002];
 	            
-	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\"+filename);
+	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\+something.txt");
 	            is.read(byteArr, 0, byteArr.length);
 	            fr.write(byteArr, 0, byteArr.length);
 	            fr.flush(); 
