@@ -6,6 +6,7 @@ import java.io.*;
 
 public class Server {
 	
+	private static final Runnable Socket = null;
 	//initialize socket and input stream 
     private Socket          socket   = null; 
     private ServerSocket    server   = null; 
@@ -17,7 +18,7 @@ public class Server {
     { 
         
     	//Transfers only specified file types	v1.0
-    	/*
+    	
         try
         { 
         	
@@ -50,6 +51,7 @@ public class Server {
                 
                 
                 os.write(byteArr, 0, byteArr.length);
+                os.flush();
                 
                 System.out.println("Sent file " + i);
                 
@@ -71,10 +73,10 @@ public class Server {
         { 
             System.out.println(i); 
         }
-        */
+        
     	
     	//v2.0
-    	
+    	/*
     	try {
     		server = new ServerSocket(port);
 			System.out.println("Server started!! ");
@@ -97,12 +99,15 @@ public class Server {
     			System.out.println("I/O error: " +e);
     		}
     		
-    		new ClientHandler(socket).start();
+    		new ClientHandler(Socket socket).start();
     		//new ServerTestClass(socket,globalArray).start();
     	}
     	
          
         
+    }
+    
+    */
     }
     
     public File[] getListOfFiles(String path) {
@@ -124,11 +129,14 @@ public class Server {
     	return listOfFiles;
     }
     
-    public static void main(String[] args) throws ClassNotFoundException {
-    	// TODO Auto-generated method stub
-    	Server server = new Server(5000);
-    	
-    }
-
+    
+}
+/*
+class ClientHandler extends Thread {
+	
+	public void run() {
+		
+	}
 
 }
+*/
