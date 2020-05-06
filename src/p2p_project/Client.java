@@ -95,11 +95,12 @@ public class Client {
             // sends output to the socket 
             out    = new DataOutputStream(socket.getOutputStream()); 
             InputStream is = socket.getInputStream();
+            String filename = input.readUTF();
             
             
 	            byte[] byteArr = new byte[20002];
 	            
-	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\");
+	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\"+filename);
 	            is.read(byteArr, 0, byteArr.length);
 	            fr.write(byteArr, 0, byteArr.length);
 	            fr.flush(); 
