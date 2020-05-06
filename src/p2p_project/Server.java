@@ -38,22 +38,22 @@ public class Server {
             
             for(int i = 0; i<listOfFiles.length; i++) {
             	
-            	System.out.println("Getting file " + i);
+            	System.out.println("Getting file " + listOfFiles[i].getName());
             	
             	fin = new FileInputStream(directory + listOfFiles[i].getName());
             	
-            	System.out.println("Converting to byte file " + i);
+            	System.out.println("Converting to byte file " + listOfFiles[i].getName());
                 
                 byte byteArr[] = new byte[2000];
                 fin.read(byteArr, 0, byteArr.length);
                 
-                System.out.println("Sending file " + i);
+                System.out.println("Sending file " + listOfFiles[i].getName());
                 
                 
                 os.write(byteArr, 0, byteArr.length);
                 os.flush();
                 
-                System.out.println("Sent file " + i);
+                System.out.println("Sent file " + listOfFiles[i].getName());
                 
                 fin.close();
                 

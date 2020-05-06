@@ -96,6 +96,7 @@ public class Client {
             out    = new DataOutputStream(socket.getOutputStream()); 
             InputStream is = socket.getInputStream();
             String filename = input.readUTF();
+            System.out.println("Got file: " + filename);
             
             
 	            byte[] byteArr = new byte[20002];
