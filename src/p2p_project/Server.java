@@ -96,6 +96,8 @@ public class Server {
     		{
     			System.out.println("I/O error: " +e);
     		}
+    		
+    		new ClientHandler(socket).start();
     		//new ServerTestClass(socket,globalArray).start();
     	}
     	
