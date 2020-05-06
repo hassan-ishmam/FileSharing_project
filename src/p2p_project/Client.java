@@ -96,14 +96,14 @@ public class Client {
             out    = new DataOutputStream(socket.getOutputStream()); 
             InputStream is = socket.getInputStream();
             
-            while(true) {
+            
 	            byte[] byteArr = new byte[20002];
 	            
-	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\" + );
+	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\");
 	            is.read(byteArr, 0, byteArr.length);
 	            fr.write(byteArr, 0, byteArr.length);
 	            fr.flush(); 
-            }
+            
             System.out.println("File transfer complete!\nClosing connection..");
             is.close();
             fr.close();
@@ -126,12 +126,7 @@ public class Client {
         
     }
     
-    
-    
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-    	// TODO Auto-generated method stub
-    	Client client = new Client("localhost", 5000); 
-    }
+
 
 
 }

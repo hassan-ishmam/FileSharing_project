@@ -12,14 +12,28 @@ import java.util.Scanner;
 
 public class P2P_Project {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException{
 		// TODO Auto-generated method stub
 		
 		Scanner scan = new Scanner(System.in);
 		
-		//System.out.print("1. Run Client\n2. Run Server\n\nEnter your choice:");
-		//int userChoice = scan.nextInt();
-		//System.out.print(userChoice);
+		
+		
+		System.out.print("1. Run Client\n2. Run Server\n\nEnter your choice:");
+		int userChoice = scan.nextInt();
+		System.out.println();
+		
+		if(userChoice == 1) {
+			
+			System.out.println("---Starting Client---");
+			Client client = new Client("localhost", 5000); 
+		}
+		
+		else if(userChoice == 2) {
+			System.out.println("---Starting Server---");
+			Server server = new Server(5000);
+		}
+			
 		
 		//Path path = Paths.get("C:\\Users\\Hassan Ishmam\\Downloads\\Test\\lab.pdf");
 		/*
@@ -32,6 +46,7 @@ public class P2P_Project {
 		}
 		*/
 		
+		/*
 		File folder = new File("C:\\Users\\Hassan Ishmam\\Downloads\\Test");
 		File[] listOfFiles = folder.listFiles();
 
@@ -43,7 +58,7 @@ public class P2P_Project {
 		  }
 		}
 		
-		
+		*/
 
 	}
 
