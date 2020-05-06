@@ -86,7 +86,18 @@ public class Server {
 			e.printStackTrace();
 		}
     	
-    	
+    	while(true)
+    	{
+    		try{
+    				socket = server.accept();
+    				
+    		}
+    		catch(IOException e)
+    		{
+    			System.out.println("I/O error: " +e);
+    		}
+    		//new ServerTestClass(socket,globalArray).start();
+    	}
     	
          
         

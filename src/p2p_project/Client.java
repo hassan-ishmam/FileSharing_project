@@ -94,13 +94,16 @@ public class Client {
   
             // sends output to the socket 
             out    = new DataOutputStream(socket.getOutputStream()); 
-            
-            byte[] byteArr = new byte[20002];
             InputStream is = socket.getInputStream();
-            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\test5.txt");
-            is.read(byteArr, 0, byteArr.length);
-            fr.write(byteArr, 0, byteArr.length);
             
+            while(true) {
+	            byte[] byteArr = new byte[20002];
+	            
+	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\" + );
+	            is.read(byteArr, 0, byteArr.length);
+	            fr.write(byteArr, 0, byteArr.length);
+	            fr.flush(); 
+            }
             System.out.println("File transfer complete!\nClosing connection..");
             is.close();
             fr.close();
