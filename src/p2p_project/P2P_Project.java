@@ -26,7 +26,7 @@ public class P2P_Project {
 		if(userChoice == 1) {
 			
 			System.out.println("---Starting Client---");
-			Client client = new Client("localhost", 5000); 
+			Client client = new Client("192.168.1.10", 5000); 
 		}
 		
 		else if(userChoice == 2) {
