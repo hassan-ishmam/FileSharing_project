@@ -31,7 +31,13 @@ public class Client {
 		            
 		            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 		            //ois.readUTF();
-		            System.out.println(ois.readUTF()); 
+		            
+		            String [] fileName = (String[]) ois.readObject();
+		            
+		            ois.close();
+		            socket.close();
+		            
+		            System.out.println(fileName);
 		            
 		}
 		catch(IOException i) 
