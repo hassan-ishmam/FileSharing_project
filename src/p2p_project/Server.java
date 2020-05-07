@@ -16,9 +16,46 @@ public class Server {
     // constructor with port 
     public Server(int port) throws ClassNotFoundException 
     { 
+    	
+    	 try
+         { 
+         	
+             server = new ServerSocket(port); 
+             System.out.println("Server started"); 
+   
+             System.out.println("Waiting for a client ..."); 
+   
+             socket = server.accept(); 
+             System.out.println("Client accepted");
+             
+             
+             File folder = new File(directory);
+             String [] fileNames = folder.list();
+             
+             ObjectOutputStream oos = new ObjectOutputStream(
+                     socket.getOutputStream());
+             
+             System.out.println("Writing Obj");
+             //String[] fileNames = new String[1]; // Empty at the moment
+             oos.writeObject(fileNames); 
+             
+             oos.flush();
+             oos.close();
+             
+             System.out.println("Bye Bye");
+             socket.close();
+             
+             
+         }
+    	 catch(IOException i) 
+         { 
+             System.out.println(i); 
+         }
+    	 
+    	
         
     	//Transfers only specified file types	v1.0
-    	
+    	/*
         try
         { 
         	
@@ -32,9 +69,16 @@ public class Server {
             
             
             File [] listOfFiles = getListOfFiles(directory);
+            int numberOfFiles = listOfFiles.length;
+            
             FileInputStream fin;
             OutputStream os;
+            
+            DataOutputStream dos = (DataOutputStream) socket.getOutputStream();
+            dos.write(numberOfFiles);
+            
             os = socket.getOutputStream();
+            os.flush();
             
             for(int i = 0; i<listOfFiles.length; i++) {
             	
@@ -73,7 +117,7 @@ public class Server {
         { 
             System.out.println(i); 
         }
-        
+        */
     	
     	//v2.0
     	/*
@@ -108,26 +152,12 @@ public class Server {
     }
     
     */
+        
+        
+       
     }
     
-    public File[] getListOfFiles(String path) {
-    	
-    	File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-    	
-    	
 
-		for (int i = 0; i < listOfFiles.length; i++) {
-		  if (listOfFiles[i].isFile()) {
-		    System.out.println("File " + listOfFiles[i].getName());
-		  } else if (listOfFiles[i].isDirectory()) {
-		    System.out.println("Directory " + listOfFiles[i].getName());
-		  }
-		}
-		
-    	
-    	return listOfFiles;
-    }
     
     
 }

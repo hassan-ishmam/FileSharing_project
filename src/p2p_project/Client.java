@@ -13,6 +13,32 @@ public class Client {
     // constructor to put ip address and port 
     public Client(String address, int port) throws IOException, ClassNotFoundException
     { 
+		try {
+		        	
+		        	//Transfers only specified file types	v1.0
+		        	
+		        	socket = new Socket(address, port); 
+		        	//socket = new Socket("localhost", 4333);
+		            System.out.println("Connected"); 
+		            
+		  
+		            // takes input from terminal 
+		            //input  = new DataInputStream(System.in); 
+		  
+		            // sends output to the socket 
+		           // out    = new DataOutputStream(socket.getOutputStream());
+		            //DataInputStream dis = new DataInputStream(socket.getInputStream());
+		            
+		            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+		            //ois.readUTF();
+		            System.out.println(ois.readUTF()); 
+		            
+		}
+		catch(IOException i) 
+        { 
+            System.out.println(i); 
+        }
+    	
         // establish a connection 
     	/*
         try
@@ -80,6 +106,8 @@ public class Client {
         }
         */
         
+    	
+    	/*
         try {
         	
         	//Transfers only specified file types	v1.0
@@ -93,13 +121,16 @@ public class Client {
             //input  = new DataInputStream(System.in); 
   
             // sends output to the socket 
-            out    = new DataOutputStream(socket.getOutputStream()); 
+            out    = new DataOutputStream(socket.getOutputStream());
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
+            
+            //int numberOfFiles = 
             InputStream is = socket.getInputStream();
             //String filename = input.readUTF();
             //System.out.println("Got file: " + filename);
             
             
-	            byte[] byteArr = new byte[20002];
+	            byte[] byteArr = new byte[1024];
 	            
 	            FileOutputStream fr = new FileOutputStream("C:\\Users\\Hassan\\Downloads\\Test2\\+something.txt");
 	            is.read(byteArr, 0, byteArr.length);
@@ -117,7 +148,7 @@ public class Client {
         { 
             System.out.println(i); 
         }
-        
+        */
   
         // string to read message from input 
         
