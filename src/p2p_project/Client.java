@@ -22,26 +22,33 @@ public class Client {
 		            System.out.println("Connected"); 
 		            
 		  
-		            // takes input from terminal 
-		            //input  = new DataInputStream(System.in); 
-		  
-		            // sends output to the socket 
-		           // out    = new DataOutputStream(socket.getOutputStream());
-		            //DataInputStream dis = new DataInputStream(socket.getInputStream());
-		            
-		            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-		            //ois.readUTF();
-		            String fileName = "";
-		            //while(true) {
-		            	
-		            	fileName = ois.readLine();
-		            //}
-		            //String [] fileName = (String[]) ois.readObject();
-		            
-		            ois.close();
-		            socket.close();
-		            
-		            System.out.println(fileName);
+		            String dirPath = "C:\\Users\\Hassan\\Downloads\\Test2\\";
+
+		            //ServerSocket serverSocket = ...;
+		            //Socket socket = serverSocket.accept();
+
+		            BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
+		            DataInputStream dis = new DataInputStream(bis);
+
+		            int filesCount = dis.readInt();
+		            File[] files = new File[filesCount];
+
+		            for(int i = 0; i < filesCount; i++)
+		            {
+		                long fileLength = dis.readLong();
+		                String fileName = dis.readUTF();
+
+		                files[i] = new File(dirPath  + fileName);
+
+		                FileOutputStream fos = new FileOutputStream(files[i]);
+		                BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+		                for(int j = 0; j < fileLength; j++) bos.write(bis.read());
+
+		                bos.close();
+		            }
+
+		            dis.close();
 		            
 		}
 		catch(IOException i) 

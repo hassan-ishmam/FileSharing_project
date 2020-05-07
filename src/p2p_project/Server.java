@@ -29,22 +29,34 @@ public class Server {
              System.out.println("Client accepted");
              
              
-             File folder = new File(directory);
-             String [] fileNames = folder.list();
+             File[] files = new File(directory).listFiles();
+             //String [] fileNames = folder.list();
              
-             ObjectOutputStream oos = new ObjectOutputStream(
-                     socket.getOutputStream());
+             BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
+             DataOutputStream dos = new DataOutputStream(bos);
              
              System.out.println("Writing Obj");
              //String[] fileNames = new String[1]; // Empty at the moment
-             for(int i = 0; i< fileNames.length; i++) {
-            	 oos.writeObject(fileNames[i]); 
-            	 oos.flush();
+             for(File file : files) {
+
+            	 long length = file.length();
+            	 dos.writeLong(length);
+            	 
+            	 String name = file.getName();
+            	 dos.writeUTF(name);
+            	 
+            	 FileInputStream fis = new FileInputStream(file);
+            	    BufferedInputStream bis = new BufferedInputStream(fis);
+
+            	    int theByte = 0;
+            	    while((theByte = bis.read()) != -1) bos.write(theByte);
+
+            	    bis.close();
              }
              //oos.writeObject(fileNames); 
              
              
-             oos.close();
+             dos.close();
              
              System.out.println("Bye Bye");
              socket.close();
