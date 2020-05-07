@@ -37,9 +37,13 @@ public class Server {
              
              System.out.println("Writing Obj");
              //String[] fileNames = new String[1]; // Empty at the moment
-             oos.writeObject(fileNames); 
+             for(int i = 0; i< fileNames.length; i++) {
+            	 oos.writeObject(fileNames[i]); 
+            	 oos.flush();
+             }
+             //oos.writeObject(fileNames); 
              
-             oos.flush();
+             
              oos.close();
              
              System.out.println("Bye Bye");
