@@ -19,7 +19,8 @@ public class Server {
     	
     	 try
          { 
-         	
+    		 
+             
              server = new ServerSocket(port); 
              System.out.println("Server started"); 
    
@@ -29,16 +30,17 @@ public class Server {
              System.out.println("Client accepted");
              
              
-             File[] files = new File(directory).listFiles();
+             
              //String [] fileNames = folder.list();
              
+             File[] files = new File(directory).listFiles();
              BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
              DataOutputStream dos = new DataOutputStream(bos);
+             dos.writeInt(files.length);
              
-             System.out.println("Writing Obj");
              //String[] fileNames = new String[1]; // Empty at the moment
              for(File file : files) {
-
+            	 System.out.println("Writing Obj " +file.getName());
             	 long length = file.length();
             	 dos.writeLong(length);
             	 
