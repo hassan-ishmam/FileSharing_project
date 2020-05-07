@@ -49,6 +49,7 @@ public class Client {
 		            }
 
 		            dis.close();
+		            socket.close();
 		            
 		}
 		catch(IOException i) 
