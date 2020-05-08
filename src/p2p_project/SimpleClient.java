@@ -73,7 +73,9 @@ public class SimpleClient {
 		
 		Scanner scan = new Scanner(System.in);
 		System.out.println("---Starting Client---");
+		System.out.print("Enter the port number: ");
 		int port = scan.nextInt();
+		System.out.println("Connecting to server....");
 		SimpleClient client = new SimpleClient("192.168.1.10", port); 
 
 	}
