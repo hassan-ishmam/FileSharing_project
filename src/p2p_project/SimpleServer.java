@@ -1,52 +1,28 @@
 package p2p_project;
 
-import java.net.*;
-import java.util.ArrayList;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-public class Server {
-	
-	public static ArrayList<FileInfo> globalArray = new ArrayList<FileInfo>();
+public class SimpleServer {
 	
 	private static final Runnable Socket = null;
 	//initialize socket and input stream 
     private Socket          socket   = null; 
     private ServerSocket    server   = null; 
     private DataInputStream in       =  null; 
-    private String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\";
+    private String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Simple Test 1\\";
   
     // constructor with port 
-    public Server(int port) throws ClassNotFoundException 
+    public SimpleServer(int port) throws ClassNotFoundException 
     { 
     	
-    	try {
-    		server = new ServerSocket(port);
-			System.out.println("Server started!! ");
-			System.out.println(" ");
-			System.out.println("Waiting for the Client to be connected ..");
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-    	
-    	while(true)
-    	{
-    		try{
-    			
-    			socket = server.accept();
-    				
-    		}
-    		catch(IOException e)
-    		{
-    			System.out.println("I/O error: " +e);
-    		}
-    		
-    		//new ClientHandler(Socket socket).start();
-    		new ClientHandler(socket,globalArray).start();
-    	}
-    	
-    	/*Works with multiple files v3.0
     	 try
          { 
     		              
@@ -98,53 +74,12 @@ public class Server {
          { 
              System.out.println(i); 
          }
-    	 */
-
-    	
-    	/*
-    	
-         
-        
     }
-    
-    */
-        
-        
-       
-    } 
-    
-}
+    	 
 
-class ClientHandler extends Thread {
-	protected Socket socket;
-	ArrayList<FileInfo> globalArray;
-	public ClientHandler(Socket clientSocket,ArrayList<FileInfo> globalArray)
-	{
-		this.socket=clientSocket;
-		this.globalArray=globalArray;
-	}
-	
-	public void run() {
-		
-		try {
-			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
-	         DataInputStream dis = new DataInputStream(bis);
-	         
-	         //Each peer sends the number of files in their directory
-	         int filesCount = dis.readInt();
-	         
-	         socket.getRemoteSocketAddress();
-	         
-	         //Storing the list of files a client contains in globalArray
-	         for(int i = 0; i < filesCount; i++) {
-	        	 
-	         }
-		}
-		catch(IOException i) 
-        { 
-            System.out.println(i); 
-        }
-		
+	public static void main(String[] args) throws ClassNotFoundException {
+		System.out.println("---Starting Server---");
+		SimpleServer server = new SimpleServer(5000);
 	}
 
 }
