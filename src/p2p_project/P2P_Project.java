@@ -26,7 +26,9 @@ public class P2P_Project {
 		if(userChoice == 1) {
 			
 			System.out.println("---Starting Client---");
-			Client client = new Client("192.168.1.10", 5000); 
+			System.out.print("Enter the port number: ");
+			int port = scan.nextInt();
+			Client client = new Client("192.168.1.10", port); 
 		}
 		
 		else if(userChoice == 2) {

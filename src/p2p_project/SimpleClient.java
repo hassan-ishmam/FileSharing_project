@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class SimpleClient {
 	
@@ -70,8 +71,10 @@ public class SimpleClient {
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		
+		Scanner scan = new Scanner(System.in);
 		System.out.println("---Starting Client---");
-		SimpleClient client = new SimpleClient("192.168.1.10", 5000); 
+		int port = scan.nextInt();
+		SimpleClient client = new SimpleClient("192.168.1.10", port); 
 
 	}
 

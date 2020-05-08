@@ -34,7 +34,7 @@ public class SimpleServer {
              socket = server.accept(); 
              System.out.println("Client accepted");
              
-             
+             System.out.println("Socket address "+socket.getRemoteSocketAddress().toString());
              
              //String [] fileNames = folder.list();
              
