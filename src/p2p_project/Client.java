@@ -88,7 +88,7 @@ public class Client {
 	             //oos.writeObject(fileNames); 
 	             
 	             //Closes DataOutputStream after all the files are sent
-	             //dos.close();
+	             dos.close();
 	             
 	             System.out.println("Files Sent!");
 	             
