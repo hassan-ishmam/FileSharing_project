@@ -128,15 +128,14 @@ class ClientHandler extends Thread {
 		
 		try {
 			
-			 System.out.println("Socket address "+socket.getRemoteSocketAddress().toString());
+			//Print out the clients address
+	         System.out.println("Connected to client: "+socket.getRemoteSocketAddress().toString());
 			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
 	         DataInputStream dis = new DataInputStream(bis);
 	         
 	         //Each peer sends the number of files in their directory
 	         int filesCount = dis.readInt();
 	         File[] files = new File[filesCount];
-	         
-	         socket.getRemoteSocketAddress();
 	         
 	         //Storing the list of files a client contains in globalArray
 	         for(int i = 0; i < filesCount; i++) {

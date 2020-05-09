@@ -69,7 +69,7 @@ public class SimpleServer {
              
              dos.close();
              
-             System.out.println("Bye Bye");
+             System.out.println("Files Sent!");
              socket.close();
              
              

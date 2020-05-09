@@ -1,6 +1,7 @@
 package p2p_project;
 
-import java.net.*; 
+import java.net.*;
+import java.util.Scanner;
 import java.io.*;
 
 public class Client {
@@ -11,45 +12,60 @@ public class Client {
     private DataOutputStream out     = null; 
   
     // constructor to put ip address and port 
-    public Client(String address, int port) throws IOException, ClassNotFoundException
+    public Client() throws IOException, ClassNotFoundException
     { 
 		try {
 		        	
 	        	//Transfers only specified file types	v1.0
+				Scanner scan = new Scanner(System.in);
+				System.out.println("---Client Started---");
+				System.out.print("Enter the port number: ");
+				int port = scan.nextInt();
+				System.out.println("Connecting to server....");
+				SimpleClient client = new SimpleClient("192.168.1.10", port); 
+
 	        	
-	        	socket = new Socket(address, port); 
+	        	socket = new Socket("192.168.1.10", port); 
 	        	//socket = new Socket("localhost", 4333);
 	            System.out.println("Connected"); 
 	            
-	  
-	            String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
+	            System.out.println("Enter the directory: ");
+	            String directory = scan.nextLine();
+	            
+	            //String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
 
 	            //ServerSocket serverSocket = ...;
 	            //Socket socket = serverSocket.accept();
 
-	            BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
-	            DataInputStream dis = new DataInputStream(bis);
+	             File[] files = new File(directory).listFiles();
+	             BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
+	             DataOutputStream dos = new DataOutputStream(bos);
+	             dos.writeInt(files.length);
+	             
+	             //String[] fileNames = new String[1]; // Empty at the moment
+	             for(File file : files) {
+	            	 System.out.println("Writing Obj " +file.getName());
+	            	 long length = file.length();
+	            	 dos.writeLong(length);
+	            	 
+	            	 String name = file.getName();
+	            	 dos.writeUTF(name);
+	            	 
+	            	 FileInputStream fis = new FileInputStream(file);
+	            	 BufferedInputStream bis = new BufferedInputStream(fis);
 
-	            int filesCount = dis.readInt();
-	            File[] files = new File[filesCount];
+	            	 int theByte = 0;
+	            	 while((theByte = bis.read()) != -1) bos.write(theByte);
 
-	            for(int i = 0; i < filesCount; i++)
-	            {
-	                long fileLength = dis.readLong();
-	                String fileName = dis.readUTF();
-
-	                files[i] = new File(directory  + fileName);
-
-	                FileOutputStream fos = new FileOutputStream(files[i]);
-	                BufferedOutputStream bos = new BufferedOutputStream(fos);
-
-	                for(int j = 0; j < fileLength; j++) bos.write(bis.read());
-
-	                bos.close();
-	            }
-
-	            dis.close();
-	            socket.close();
+	            	 bis.close();
+	             }
+	             //oos.writeObject(fileNames); 
+	             
+	             
+	             dos.close();
+	             
+	             System.out.println("Files Sent!");
+	             socket.close();
 		            
 		}
 		catch(IOException i) 
