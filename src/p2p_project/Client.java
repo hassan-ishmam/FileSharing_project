@@ -17,10 +17,10 @@ public class Client {
 		try {
 		        	
 	        	//Transfers only specified file types	v1.0
-				Scanner scan = new Scanner(System.in);
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 				System.out.println("---Client Started---");
 				System.out.print("Enter the port number: ");
-				int port = scan.nextInt();
+				int port=Integer.parseInt(br.readLine());
 				System.out.println("Connecting to server...."); 
 
 	        	
@@ -28,10 +28,10 @@ public class Client {
 	        	//socket = new Socket("localhost", 4333);
 	            System.out.println("Connected"); 
 	            
-	            //System.out.println("Enter the directory: ");
-	            //String directory = scan.nextLine();
+	            System.out.println("Enter the directory: ");
+	            String directory = br.readLine();
 	            
-	            String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
+	            //String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
 
 	            //ServerSocket serverSocket = ...;
 	            //Socket socket = serverSocket.accept();

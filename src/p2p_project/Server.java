@@ -125,33 +125,42 @@ class ClientHandler extends Thread {
 	}
 	
 	public void run() {
+
+		receiveFile();
+	}
+	
+	private void receiveFile() {
 		
 		try {
 			
 			//Print out the clients address
 	         System.out.println("Connected to client: "+socket.getRemoteSocketAddress().toString());
+	         
+	         //Declaring input streams for reading data sent from client over socket
 			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
 	         DataInputStream dis = new DataInputStream(bis);
-	         
-	         System.out.println("Debugging");
 	         
 	         //Each peer sends the number of files in their directory
 	         int filesCount = dis.readInt();
 	         File[] files = new File[filesCount];
 	         
-	         //Storing the list of files a client contains in globalArray
+	         //Receiving files from client
 	         for(int i = 0; i < filesCount; i++) {
-	        	 
+	        	
+	        	//Reads the files name and length 
 	        	long fileLength = dis.readLong();
                 String fileName = dis.readUTF();
                 System.out.println("Received file: " +fileName);
-
+                
+                //Creates a new empty file
                 files[i] = new File(directory  + fileName);
-
+                
+                //Writes the info into files
                 FileOutputStream fos = new FileOutputStream(files[i]);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-                for(int j = 0; j < fileLength; j++) bos.write(bis.read());
+                for(int j = 0; j < fileLength; j++) 
+                	bos.write(bis.read());
 
 	            bos.close();
 	        	 
@@ -165,7 +174,6 @@ class ClientHandler extends Thread {
         { 
             System.out.println(i); 
         }
-		
 	}
 
 }
