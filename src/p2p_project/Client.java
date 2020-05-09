@@ -105,6 +105,7 @@ public class Client {
     public void receiveFileFromServer() {
     	
     	try {
+    		
 			
 			//Print out the clients address
 	         System.out.println("Connected to Server \nIP: "+socket.getInetAddress().toString()+ "\nPort: " +socket.getPort());
@@ -154,7 +155,7 @@ public class Client {
 		}
 		catch(IOException i) 
         { 
-            System.out.println(i); 
+            System.out.println("Error: " +i); 
         }
     	
     }
