@@ -65,6 +65,10 @@ class ClientHandler extends Thread {
 	//Directory of the folder where the files are stored
 	public String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\";
 	
+	//Gets the output stream from Socket
+    BufferedOutputStream bos;
+    DataOutputStream dos;
+	
 	//Constructor
 	public ClientHandler(Socket clientSocket)
 	{
@@ -73,6 +77,15 @@ class ClientHandler extends Thread {
 	}
 	
 	public void run() {
+		
+		//Gets the output stream from Socket
+        try {
+			bos = new BufferedOutputStream(socket.getOutputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        dos = new DataOutputStream(bos);
 		
 		//Receives and stores the files in the server
 		receiveFileFromClient();
@@ -147,9 +160,6 @@ class ClientHandler extends Thread {
 		
 		File[] files = new File(directory).listFiles();
         
-        //Gets the output stream from Socket
-        BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
-        DataOutputStream dos = new DataOutputStream(bos);
         
         //Sends the number of files in the folder as output stream, it will help receive the files
         dos.writeInt(files.length);
