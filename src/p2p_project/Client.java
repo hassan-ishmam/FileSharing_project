@@ -7,12 +7,14 @@ import java.io.*;
 public class Client {
 	
 	// initialize socket 
-    private Socket socket            = null; 
+    private Socket socket            = null;
+    public String directory = null;
   
     public Client() throws IOException, ClassNotFoundException
     {
     	//Sends Files on client device to server
     	sendFileToServer();
+    	receiveFileFromServer();
 
     }
     
@@ -39,7 +41,7 @@ public class Client {
 	            
 	            //Takes the Directory as input from user of the folder to sync
 	            System.out.println("Enter the directory: ");
-	            String directory = br.readLine();
+	            directory = br.readLine();
 	            
 	            //String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
 	            
@@ -74,6 +76,7 @@ public class Client {
 	
 	            	 int theByte = 0;
 	            	 while((theByte = bis.read()) != -1) bos.write(theByte);
+	            	 System.out.println("Sent: " + name);
 	            	 
 	            	 //Closes buffered input stream
 	            	 bis.close();
@@ -93,6 +96,63 @@ public class Client {
 	    { 
 	        System.out.println(i); 
 	    }
+    }
+    
+    public void receiveFileFromServer() {
+    	
+    	try {
+			
+			//Print out the clients address
+	         System.out.println("Connected to Server \nIP: "+socket.getInetAddress().toString()+ "\nPort: " +socket.getPort());
+	         
+	         //Declaring input streams for reading data sent from Server over socket
+			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
+	         DataInputStream dis = new DataInputStream(bis);
+	         
+	         //Server sends the number of files in their directory
+	         //So the receiver knows how many times to run the loop for receiving files
+	         int filesCount = dis.readInt();
+	         
+	         //Declares an Array of files
+	         File[] files = new File[filesCount];
+	         
+	         //Receiving files from Server
+	         for(int i = 0; i < filesCount; i++) {
+	        	
+	        	//Reads the files name and length first so it know how much memory to allocate
+	        	long fileLength = dis.readLong();
+                String fileName = dis.readUTF();
+                
+                
+                System.out.println("Received file: " +fileName);
+                
+                //Creates a new empty file
+                files[i] = new File(directory  + fileName);
+                
+                //Writes the info into files
+                FileOutputStream fos = new FileOutputStream(files[i]);
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+                for(int j = 0; j < fileLength; j++) 
+                	bos.write(bis.read());
+
+	            bos.close();
+	        	 
+	         }
+	         
+	         //Tells the user that receiving files has been complete
+	         System.out.println("File receiving complete from Server having IP: " + socket.getInetAddress().toString()+ "\nPort: " +socket.getPort());
+	         
+	         //Closes the Input Stream and the socket
+	         dis.close();
+	         socket.close();
+	            
+		}
+		catch(IOException i) 
+        { 
+            System.out.println(i); 
+        }
+    	
     }
     
     public static void main(String[] args) throws ClassNotFoundException, IOException {
