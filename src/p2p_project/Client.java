@@ -18,7 +18,7 @@ public class Client {
     {
     	//Sends Files on client device to server
     	sendFileToServer();
-    	receiveFileFromServer();
+    	//receiveFileFromServer();
 
     }
     

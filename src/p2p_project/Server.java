@@ -80,14 +80,14 @@ class ClientHandler extends Thread {
 		
 		//The program generates an error while sending all the files back to the client
 		//It does not crash because of try catch block
-		
+		/*
 		try {
 			sendFileToClient();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 	}
 	
 	private void receiveFileFromClient() {
