@@ -134,7 +134,7 @@ class ClientHandler extends Thread {
 	         
 	         //Closes the Input Stream and the socket
 	         dis.close();
-	         socket.close();
+	         //socket.close();
 	            
 		}
 		catch(IOException i) 

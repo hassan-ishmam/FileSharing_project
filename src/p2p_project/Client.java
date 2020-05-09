@@ -89,7 +89,7 @@ public class Client {
 	             System.out.println("Files Sent!");
 	             
 	             //Closes Socket
-	             socket.close();
+	             //socket.close();
 		            
 		}
 		catch(IOException i) 
