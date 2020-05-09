@@ -67,10 +67,19 @@ class ClientHandler extends Thread {
 	
 	public void run() {
 
-		receiveFile();
+		receiveFileFromClient();
+		
+		/*
+		try {
+			sendFileToClient();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
 	
-	private void receiveFile() {
+	private void receiveFileFromClient() {
 		
 		try {
 			
@@ -91,7 +100,7 @@ class ClientHandler extends Thread {
 	        	//Reads the files name and length 
 	        	long fileLength = dis.readLong();
                 String fileName = dis.readUTF();
-                System.out.println("Received file: " +fileName);
+                //System.out.println("Received file: " +fileName);
                 
                 //Creates a new empty file
                 files[i] = new File(directory  + fileName);
@@ -107,6 +116,8 @@ class ClientHandler extends Thread {
 	        	 
 	         }
 	         
+	         System.out.println("File receiving complete from client having IP: " + socket.getInetAddress().toString()+ "\nPort: " +socket.getPort());
+	         
 	         dis.close();
 	         socket.close();
 	            
@@ -115,6 +126,42 @@ class ClientHandler extends Thread {
         { 
             System.out.println(i); 
         }
+	}
+	
+	public void sendFileToClient() throws IOException {
+		
+		System.out.println("Sending file to client having IP: " + socket.getInetAddress().toString()+ "\nPort: " +socket.getPort());
+		
+		File[] files = new File(directory).listFiles();
+        BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
+        DataOutputStream dos = new DataOutputStream(bos);
+        dos.writeInt(files.length);
+        //System.out.println("")
+        
+        //String[] fileNames = new String[1]; // Empty at the moment
+        for(File file : files) {
+       	 System.out.println("Writing Obj " +file.getName());
+       	 long length = file.length();
+       	 dos.writeLong(length);
+       	 
+       	 String name = file.getName();
+       	 dos.writeUTF(name);
+       	 
+       	 FileInputStream fis = new FileInputStream(file);
+       	 BufferedInputStream bis = new BufferedInputStream(fis);
+
+       	 int theByte = 0;
+       	 while((theByte = bis.read()) != -1) bos.write(theByte);
+
+       	 bis.close();
+        }
+        //oos.writeObject(fileNames); 
+        
+        
+        dos.close();
+        
+        System.out.println("Files Sent!");
+        socket.close();
 	}
 
 }
