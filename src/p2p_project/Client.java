@@ -28,10 +28,10 @@ public class Client {
 	        	//socket = new Socket("localhost", 4333);
 	            System.out.println("Connected"); 
 	            
-	            System.out.println("Enter the directory: ");
-	            String directory = scan.nextLine();
+	            //System.out.println("Enter the directory: ");
+	            //String directory = scan.nextLine();
 	            
-	            //String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
+	            String directory = "C:\\Users\\Hassan\\Downloads\\Test2\\";
 
 	            //ServerSocket serverSocket = ...;
 	            //Socket socket = serverSocket.accept();
@@ -40,6 +40,7 @@ public class Client {
 	             BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
 	             DataOutputStream dos = new DataOutputStream(bos);
 	             dos.writeInt(files.length);
+	             //System.out.println("")
 	             
 	             //String[] fileNames = new String[1]; // Empty at the moment
 	             for(File file : files) {

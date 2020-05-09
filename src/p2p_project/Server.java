@@ -133,6 +133,8 @@ class ClientHandler extends Thread {
 			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
 	         DataInputStream dis = new DataInputStream(bis);
 	         
+	         System.out.println("Debugging");
+	         
 	         //Each peer sends the number of files in their directory
 	         int filesCount = dis.readInt();
 	         File[] files = new File[filesCount];
