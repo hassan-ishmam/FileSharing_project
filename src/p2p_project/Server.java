@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Server {
 	
-	public static ArrayList<FileInfo> globalArray = new ArrayList<FileInfo>();
+	//public static ArrayList<FileInfo> globalArray = new ArrayList<FileInfo>();
 	
 	private static final Runnable Socket = null;
 	//initialize socket and input stream 
@@ -42,86 +42,27 @@ public class Server {
     		}
     		
     		//new ClientHandler(Socket socket).start();
-    		new ClientHandler(socket,globalArray).start();
+    		new ClientHandler(socket).start();
     	}
     	
-    	/*Works with multiple files v3.0
-    	 try
-         { 
-    		              
-             server = new ServerSocket(port); 
-             System.out.println("Server started"); 
-   
-             System.out.println("Waiting for a client ..."); 
-   
-             socket = server.accept(); 
-             System.out.println("Client accepted");
-             
-             
-             
-             //String [] fileNames = folder.list();
-             
-             File[] files = new File(directory).listFiles();
-             BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
-             DataOutputStream dos = new DataOutputStream(bos);
-             dos.writeInt(files.length);
-             
-             //String[] fileNames = new String[1]; // Empty at the moment
-             for(File file : files) {
-            	 System.out.println("Writing Obj " +file.getName());
-            	 long length = file.length();
-            	 dos.writeLong(length);
-            	 
-            	 String name = file.getName();
-            	 dos.writeUTF(name);
-            	 
-            	 FileInputStream fis = new FileInputStream(file);
-            	 BufferedInputStream bis = new BufferedInputStream(fis);
-
-            	 int theByte = 0;
-            	 while((theByte = bis.read()) != -1) bos.write(theByte);
-
-            	 bis.close();
-             }
-             //oos.writeObject(fileNames); 
-             
-             
-             dos.close();
-             
-             System.out.println("Bye Bye");
-             socket.close();
-             
-             
-         }
-    	 catch(IOException i) 
-         { 
-             System.out.println(i); 
-         }
-    	 */
-
-    	
-    	/*
-    	
-         
-        
+       
     }
     
-    */
-        
-        
-       
-    } 
+    public static void main(String[] args) throws ClassNotFoundException {
+		System.out.println("---Starting Server---");
+		Server server = new Server();
+	}
     
 }
 
 class ClientHandler extends Thread {
 	protected Socket socket;
-	ArrayList<FileInfo> globalArray;
+	//ArrayList<FileInfo> globalArray;
 	public String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\";
-	public ClientHandler(Socket clientSocket,ArrayList<FileInfo> globalArray)
+	public ClientHandler(Socket clientSocket)
 	{
 		this.socket=clientSocket;
-		this.globalArray=globalArray;
+		//this.globalArray=globalArray;
 	}
 	
 	public void run() {
@@ -134,7 +75,7 @@ class ClientHandler extends Thread {
 		try {
 			
 			//Print out the clients address
-	         System.out.println("Connected to client: "+socket.getRemoteSocketAddress().toString());
+	         System.out.println("Connected to client \nIP: "+socket.getInetAddress().toString()+ "\nPort: " +socket.getPort());
 	         
 	         //Declaring input streams for reading data sent from client over socket
 			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
