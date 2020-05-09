@@ -11,8 +11,8 @@ public class Client {
     public String directory = null;
     
   //Gets the output stream from Socket
-    BufferedOutputStream bos;
-    DataOutputStream dos;
+    //BufferedOutputStream bos;
+    //DataOutputStream dos;
   
     public Client() throws IOException, ClassNotFoundException
     {
@@ -54,7 +54,7 @@ public class Client {
 	             File[] files = new File(directory).listFiles();
 	             
 	             //Gets the output stream from Socket
-	             bos = new BufferedOutputStream(socket.getOutputStream());
+	             BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
 	             DataOutputStream dos = new DataOutputStream(bos);
 	             
 	             //Sends the number of files in the folder as output stream, it will help receive the files
