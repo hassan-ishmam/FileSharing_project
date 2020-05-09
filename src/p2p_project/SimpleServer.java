@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class SimpleServer {
 	
@@ -20,12 +21,15 @@ public class SimpleServer {
     private String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Simple Test 1\\";
   
     // constructor with port 
-    public SimpleServer(int port) throws ClassNotFoundException 
+    public SimpleServer() throws ClassNotFoundException 
     { 
+    	Scanner scan = new Scanner(System.in);
+    	System.out.print("Enter the port number to listen: ");
+		int port = scan.nextInt();
     	
     	 try
          { 
-    		              
+    		               		 
              server = new ServerSocket(port); 
              System.out.println("Server started"); 
    
@@ -79,7 +83,7 @@ public class SimpleServer {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		System.out.println("---Starting Server---");
-		SimpleServer server = new SimpleServer(5000);
+		SimpleServer server = new SimpleServer();
 	}
 
 }

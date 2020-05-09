@@ -13,14 +13,13 @@ public class Server {
     private Socket          socket   = null; 
     private ServerSocket    server   = null; 
     private DataInputStream in       =  null; 
-    private String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\";
   
     // constructor with port 
-    public Server(int port) throws ClassNotFoundException 
+    public Server() throws ClassNotFoundException 
     { 
     	
     	try {
-    		server = new ServerSocket(port);
+    		server = new ServerSocket(5000);
 			System.out.println("Server started!! ");
 			System.out.println(" ");
 			System.out.println("Waiting for the Client to be connected ..");
@@ -118,6 +117,7 @@ public class Server {
 class ClientHandler extends Thread {
 	protected Socket socket;
 	ArrayList<FileInfo> globalArray;
+	public String directory = "C:\\Users\\Hassan Ishmam\\Downloads\\Test2\\";
 	public ClientHandler(Socket clientSocket,ArrayList<FileInfo> globalArray)
 	{
 		this.socket=clientSocket;
@@ -127,18 +127,38 @@ class ClientHandler extends Thread {
 	public void run() {
 		
 		try {
+			
+			 System.out.println("Socket address "+socket.getRemoteSocketAddress().toString());
 			 BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
 	         DataInputStream dis = new DataInputStream(bis);
 	         
 	         //Each peer sends the number of files in their directory
 	         int filesCount = dis.readInt();
+	         File[] files = new File[filesCount];
 	         
 	         socket.getRemoteSocketAddress();
 	         
 	         //Storing the list of files a client contains in globalArray
 	         for(int i = 0; i < filesCount; i++) {
 	        	 
+	        	long fileLength = dis.readLong();
+                String fileName = dis.readUTF();
+                System.out.println("Received file: " +fileName);
+
+                files[i] = new File(directory  + fileName);
+
+                FileOutputStream fos = new FileOutputStream(files[i]);
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+                for(int j = 0; j < fileLength; j++) bos.write(bis.read());
+
+	            bos.close();
+	        	 
 	         }
+	         
+	         dis.close();
+	         socket.close();
+	            
 		}
 		catch(IOException i) 
         { 

@@ -33,7 +33,7 @@ public class P2P_Project {
 		
 		else if(userChoice == 2) {
 			System.out.println("---Starting Server---");
-			Server server = new Server(5000);
+			Server server = new Server();
 		}
 			
 		
