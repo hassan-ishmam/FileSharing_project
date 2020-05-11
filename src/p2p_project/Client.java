@@ -39,7 +39,7 @@ public class Client {
 				System.out.println("Connecting to server...."); 
 				
 				//This is the IP address of my Server PC. Any user can replace this number with their desired Server's address
-	        	socket = new Socket("192.168.1.10", port); 
+	        	socket = new Socket("000.000.0.00", port); 
 	        	//socket = new Socket("localhost", 4333);
 	            System.out.println("Connected"); 
 	            
